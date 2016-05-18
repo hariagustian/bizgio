@@ -277,6 +277,18 @@ var _obj = Class({
 					}
 				]
 			}
+		},
+		scrambled:function(answer,intVar){
+			return { 
+			"userLayer":
+				[
+					{
+						'action':'user-scrambled',
+						"answer":answer,
+						'index':intVar
+					}
+				]
+			}
 		}
 	}, 
 	thirdParty:{
@@ -639,6 +651,111 @@ var _bizgio =  Class(_obj,{
 									}
 								})
 			})
+	},
+	scrambled:function(){
+		var obj = new _obj(),
+			parent = id('scrambled');
+			btnElement = qobj.get.element(parent,el.button)[0],
+			inptElement = qobj.get.element(parent,el.input)[0],
+			firstLoad = VidLib.firstWord(),
+			intVar = 0,
+			pPoint = id('point')
+		
+		//http://stackoverflow.com/questions/3943772/how-do-i-shuffle-the-characters-in-a-string-in-javascript
+		
+		function generateWord(firstLoad){
+			function shuffelWord (word){
+				var shuffledWord = '';
+				var charIndex = 0;
+				word = word.split('');
+				while(word.length > 0){
+					charIndex = word.length * Math.random() << 0;
+					shuffledWord += word[charIndex];
+					word.splice(charIndex,1);
+				}
+				return shuffledWord;
+			}
+			
+			var string = firstLoad.split('.');
+			intVar = string[1];
+			var firstWordArr = shuffelWord(string[0]).split('')
+				
+			jQuery(id('rand-char')).html('');	
+			for(var x=0 in firstWordArr){
+				jQuery(id('rand-char')).append('<li class="m5">'+firstWordArr[x]+'</li>')
+			}
+		}
+		
+		generateWord(firstLoad)
+		
+		function sendUserInput(answer,event,intVar){
+				jQuery(id('alert-error')).css({'display':'none'})
+		
+				if(event == 'click'){
+					btnElement.innerHTML = 'Loading';
+				}
+							
+				jQuery(btnElement).addClass('disabled');
+				jQuery(inptElement).addClass('disabled');
+				
+				
+				qobj.send.json($$.address_Ab,
+					obj.json.scrambled(answer,intVar),
+					function alphaHandler() {
+
+					
+					jQuery(btnElement).removeClass('disabled');
+					jQuery(inptElement).removeClass('disabled');
+					
+					if(event == 'click'){
+						btnElement.innerHTML = 'Submit';
+					}
+					
+					//handle serverResponse
+					var data = qlabs.read.json(this.responseText);
+					if(data.returnValue == true){
+						intVar = data.randInt
+						firstLoad = data.randVal
+						//clear
+						inptElement.value = '';
+						//generate new scrambled
+						generateWord(firstLoad+'.'+intVar);
+						
+						//get plus
+						pPoint.innerHTML = parseInt(pPoint.innerHTML) + 1;
+					}else{	
+						intVar = data.randInt
+						firstLoad = data.randVal
+						inptElement.value = '';
+						//generate new scrambled
+						generateWord(firstLoad+'.'+intVar);
+						
+					
+						//write a message 
+						__dom.appendObject(el.span, 'wrong answer', id('alert-error'), '')
+						
+						//get plus
+						pPoint.innerHTML = parseInt(pPoint.innerHTML) - 1;
+					}
+					
+				})
+		}
+		
+		listener.add(btnElement,'do',function(){
+			//press click
+			var answer = qobj.get.value(parent,el.input)[0];
+				sendUserInput(answer,'click',intVar)
+			
+		})
+		
+		listener.add(inptElement,'keypress',function(e){
+			//press enter
+			if(e.keyCode == 13){
+				
+				var answer = qobj.get.value(parent,el.input)[0]
+					sendUserInput(answer,'enter',intVar)
+			}
+		})
 	}
 })
 
@@ -658,7 +775,8 @@ var bizgio = new _bizgio;
 		bizgio.signup();	
 	else if(id('contact-page'))
 		bizgio.contact();
-		
+	else if(id('scrambled'))
+		bizgio.scrambled();
 
 
 //***********//

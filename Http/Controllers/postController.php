@@ -31,6 +31,30 @@ class postController extends Controller {
 						'serverResponse' => 'insertFalse'
 					)));
 				}
+			}else if($action == 'user-scrambled'){
+				$answer = $layer[0]['answer'];
+				$index = $layer[0]['index'];
+				
+				
+				$glossaryArr = $gFunct::getGlossary();
+				$indexNew = array_rand($glossaryArr);
+				
+				if(strtolower($answer) == strtolower($glossaryArr[$index])){
+					//if true then generate new scramble
+					exit(json_encode(array(
+						'returnValue' => true,
+						'randVal' => ucfirst($glossaryArr[$indexNew]),
+						'randInt' => $indexNew
+					)));
+				}else{
+					exit(json_encode(array(
+						'returnValue' => false,
+						'randVal' => ucfirst($glossaryArr[$indexNew]),
+						'randInt' => $indexNew
+					)));
+				}
+			
+				
 			}
 		}else{
 			//something wierd, illegal action
@@ -50,27 +74,37 @@ class postController extends Controller {
 				$email = $layer[0]['mail'];
 				$getPassMd5 = $layer[0]['pass'];
 				$userData = $qUser::selectUserPassAndEmail($email);
-
-				foreach($userData as $row){
-					$getSalt = $row -> salt;
-					$getPassword = $row -> password;
-				}
 				
-				$authCon = $gFunct::auth($getPassMd5,$getSalt,$getPassword);
+				if(count($userData) > 0){
 				
-				//remove sensitive userdata
-				unset($userData[0]->password);
-				unset($userData[0]->salt);
+					foreach($userData as $row){
+						$getSalt = $row -> salt;
+						$getPassword = $row -> password;
+					}
 				
-				if($authCon === false){
+					$authCon = $gFunct::auth($getPassMd5,$getSalt,$getPassword);
+					
+					//remove sensitive userdata
+					unset($userData[0]->password);
+					unset($userData[0]->salt);
+					
+					if($authCon === false){
+						echo(json_encode(array(
+							'returnValue' => false,
+							'serverResponse' => 'passwordFalse'
+						)));
+					}else{
+						echo(json_encode(array(
+							'returnValue' => true,
+							'serverResponse' => 'loginTrue'
+						)));
+					}
+				
+				}else{
+					//unregisterd email
 					echo(json_encode(array(
 						'returnValue' => false,
 						'serverResponse' => 'passwordFalse'
-					)));
-				}else{
-					echo(json_encode(array(
-						'returnValue' => true,
-						'serverResponse' => 'loginTrue'
 					)));
 				}
 				

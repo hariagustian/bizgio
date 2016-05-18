@@ -1,9 +1,31 @@
 <?php namespace App\Http\Controllers;
 use App\Libraries\seoFunction;
+use App\Libraries\globalFunction;
 use \Validator, \Redirect, \Request, Session, Input, URL;
 
 class viewController extends Controller {
-
+	
+	public function dropme(){
+		return View('frontend/main/dropme');
+	}
+	
+	public function acakKata(){
+		$seoF = new seoFunction;
+		$gFunct = new globalFunction;
+		$metaData = $seoF::metaData('acakkata');
+		
+		$randomArr = $gFunct::getGlossary();
+		$randInt = array_rand($randomArr);
+		$randVal = ucfirst($randomArr[$randInt]);
+			
+		
+		
+		return View('frontend/main/acakkata')
+				->with(compact('metaData'))
+				->with(compact('randInt'))
+				->with(compact('randVal'));
+	}
+	
 	public function homepage(){
 		$seoF = new seoFunction;
 		$metaData = $seoF::metaData('home');

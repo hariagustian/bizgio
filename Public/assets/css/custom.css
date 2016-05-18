@@ -624,3 +624,185 @@ label {
 .main-menu-container ul li:hover{
 	background:#565C69;
 }
+/******************/
+/*  ACAK KATA  */
+ .box-rand{
+	padding-top:70px
+ }
+ 
+.body-shuffle{
+	width:100%;
+	background:#fff;
+	text-align:center;
+	padding:20px
+	
+}
+
+.body-shuffle li{
+	border-radius:5px;
+	width:50px;
+	height:50px;
+	background:#eee;
+	font-size:25pt
+}
+
+.body-shuffle li:hover{
+	background:#E4E4E4;
+}
+
+.input-shuffle{
+	width:100%
+}
+
+/****
+/** drope me */
+.nav-pills{
+	z-index:99
+}
+.dropme .nav-pills{
+	position: fixed;
+	top: 50%;
+	right: 0;
+	transform: translate(0%, -50%);
+}
+
+.bg-level-0{
+	background:transparent url(../images/cityscape.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover
+}
+
+.dropme .box-top{
+	height:680px
+}
+
+.absolute-center-dropme{
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	padding:20px;
+	color:white;
+	font-weight:bold;
+	height: 45%;
+	text-align: center;
+	right: 0;
+	
+}
+
+.fz45{
+	font-size:45pt
+}
+.fz14{
+	font-size:14pt
+}
+
+.color-oranges{
+	color:#ffb400
+}
+.box-image{
+	width:100%
+}
+.box-image li{
+	width:33.33%;
+	padding:0px;
+	margin:0px;
+	height:227px;
+}
+
+.box-contact > li{
+	width:33%;
+	padding:0px;
+	margin:0px;
+	height:227px;
+}
+
+
+.body-inline li{
+	float:left
+}
+
+.art1{
+	background:transparent url(../images/art1.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+
+.art2{
+	background:transparent url(../images/art2.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+
+.art3{
+	background:transparent url(../images/art3.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+
+.art4{
+	background:transparent url(../images/art4.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+
+.art5{
+	background:transparent url(../images/art5.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+
+.art6{
+	background:transparent url(../images/art6.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.art7{
+	background:transparent url(../images/art7.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.art8{
+	background:transparent url(../images/art8.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.art9{
+	background:transparent url(../images/art9.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+	
+}
+
+.cover-opacity{
+	background:#fff;height:100%;width:100%;opacity:0.7;
+	z-index:1
+}
+.cover-opacity:hover{
+	opacity:0.1;
+	cursor:pointer
+}
+
+.header-fixed {
+	background-color:#fff;
+	overflow:auto;
+	padding:20px;
+	position:fixed;
+	top:0px;
+	width:100%;
+	z-index:99;
+	padding-right:73px
+}
+
+.header-fixed a{
+	color:#0C0C0C !important
+}

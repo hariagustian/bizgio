@@ -2,7 +2,7 @@
 use App\Libraries\test;
 use \Validator, \Redirect, \Request, Session, Input, URL;
 
-class json extends controller {
+class json extends Controller {
 
 	public function json(){
 		$base = URL::to('/');

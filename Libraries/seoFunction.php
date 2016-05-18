@@ -97,6 +97,12 @@ class seoFunction{
 			$metaKeyword = 'Request to request password - '.$getPageName;
 			
 			$metaData = generateMeta($getPageName,$title,$description,$metaKeyword);
+		}else if($initial == 'acakkata'){
+			$title = 'Scrambled me - '.$getPageName;
+			$description = 'Scrambled me - '.$getPageName;
+			$metaKeyword = 'Scrambled me - '.$getPageName;
+			
+			$metaData = generateMeta($getPageName,$title,$description,$metaKeyword);
 		}
 		
 		

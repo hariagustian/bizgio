@@ -14,6 +14,11 @@ use App\Exceptions\Handler;
 Route::get('/', function () {
     return view('welcome');
 });*/
+//task 1
+Route::get('scrambled ', 'viewController@acakKata');
+//task 2
+Route::get('dropme ', 'viewController@dropme');
+
 
 Route::get('coba', 'viewController@test');
 Route::get('/', 'viewController@homepage');
